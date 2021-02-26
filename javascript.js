@@ -30,21 +30,32 @@ var indexQuestion = 0;
 function showQuestion(event){
     // show the question
     event.preventDefault();
-var questionsTags=document.querySelector(".questions > p");
-questionsTags.textContent= questions[0].question;
+   var questionsTags=document.querySelector(".questions");
+   questionsTags.textContent= questions[0].question;
 
 //show the buttons
-var choicesTags= document.querySelector(".choices");
-var choiceAButton=choicesTags.setAttribute("class","choiceA");
-var choiceBButton=choicesTags.setAttribute("class","choiceB");
-var choiceCButton=choicesTags.setAttribute("class","choiceC");
-var choiceDButton=choicesTags.setAttribute("class","choiceD");
-choiceAButton.textContent = questions[0].choice[0]; 
-choiceBButton.textContent = questions[0].choice[1];
-choiceCButton.textContent = questions[0].choice[2];
-choiceDButton.textContent = questions[0].choice[3];
+//   var choicesTags= document.querySelector(".choices"); 
+    var buttonA = document.createElement("buttonA");
+    buttonA.setAttribute("class","buttonA");
+    var buttonAtext =document.createTextNode(questions[0].choice[0]); 
+    buttonA.appendChild(buttonAtext);
+    document.getElementsByClassName("choices").appendChild(buttonA);
+  }
 
-}
+
+
+
+// var choicesTags= document.querySelector(".choices");
+// var choiceAButton=choicesTags.setAttribute("class","choiceA");
+// var choiceBButton=choicesTags.setAttribute("class","choiceB");
+// var choiceCButton=choicesTags.setAttribute("class","choiceC");
+// var choiceDButton=choicesTags.setAttribute("class","choiceD");
+// choiceAButton.textContent = questions[0].choice[0]; 
+// choiceBButton.textContent = questions[0].choice[1];
+// choiceCButton.textContent = questions[0].choice[2];
+// choiceDButton.textContent = questions[0].choice[3];
+
+
 // add event listener
 startButton.addEventListener("click",showQuestion);
 //verify response
