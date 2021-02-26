@@ -38,12 +38,19 @@ button{
  
 
 }
-.choices{
-    
+
+.buttonA,
+.buttonB,
+.buttonC,
+.buttonD{
+    margin-top:10px;
     background-color: purple;
     border-radius: 8px;
     border-color:whitesmoke;
     padding: 5px 10px;
     font-size: 20px;
     color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    
 }

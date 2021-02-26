@@ -1,5 +1,11 @@
 var timerEl = document.querySelector(".timer-count");
 var startButton= document.querySelector("#start-button");
+var buttonA = document.createElement("buttonA");
+var buttonB = document.createElement("buttonB");
+var buttonC = document.createElement("buttonC");
+var buttonD = document.createElement("buttonD");
+var i=0;
+var j=0;
 
 var current
 
@@ -29,73 +35,63 @@ var indexQuestion = 0;
 
 function showQuestion(event){
     // show the question
-    event.preventDefault();
+    // event.preventDefault();
    var questionsTags=document.querySelector(".questions");
-   questionsTags.textContent= questions[0].question;
+   questionsTags.textContent= questions[j].question;
 
 //show the buttons
 //   var choicesTags= document.querySelector(".choices"); 
 startButton.style.visibility="hidden";
-
-    var buttonA = document.createElement("buttonA");
+    
+    
     buttonA.setAttribute("class","buttonA");
-    var buttonAtext = document.createTextNode(questions[0].choice[0]); 
+    var buttonAtext = document.createTextNode(questions[i].choice[0]); 
     buttonA.appendChild(buttonAtext);
     document.getElementsByClassName("choices")[0].appendChild(buttonA);
 
   
-    var buttonB = document.createElement("buttonB");
+ 
     buttonB.setAttribute("class","buttonB");
-    var buttonBtext = document.createTextNode(questions[0].choice[1]); 
+    var buttonBtext = document.createTextNode(questions[i].choice[1]); 
     buttonB.appendChild(buttonBtext);
     document.getElementsByClassName("choices")[0].appendChild(buttonB);
 
-    var buttonC = document.createElement("buttonC");
+   
     buttonC.setAttribute("class","buttonC");
-    var buttonCtext = document.createTextNode(questions[0].choice[2]); 
+    var buttonCtext = document.createTextNode(questions[i].choice[2]); 
     buttonC.appendChild(buttonCtext);
     document.getElementsByClassName("choices")[0].appendChild(buttonC);
     
+    
+    buttonD.setAttribute("class","buttonD");
+    var buttonDtext = document.createTextNode(questions[i].choice[3]); 
+    buttonD.appendChild(buttonDtext);
+    document.getElementsByClassName("choices")[0].appendChild(buttonD);
   }
-
-
-
-
-// var choicesTags= document.querySelector(".choices");
-// var choiceAButton=choicesTags.setAttribute("class","choiceA");
-// var choiceBButton=choicesTags.setAttribute("class","choiceB");
-// var choiceCButton=choicesTags.setAttribute("class","choiceC");
-// var choiceDButton=choicesTags.setAttribute("class","choiceD");
-// choiceAButton.textContent = questions[0].choice[0]; 
-// choiceBButton.textContent = questions[0].choice[1];
-// choiceCButton.textContent = questions[0].choice[2];
-// choiceDButton.textContent = questions[0].choice[3];
 
 
 // add event listener
 startButton.addEventListener("click",showQuestion);
+//if choose the right answer: function;
+
+
+//else,responding the wrong one
+buttonC.addEventListener("click",function(){
+    i+=1;
+    j+=1;
+    // buttonAtext.style.visibility="hidden";
+    showQuestion();
+
+})
+
+
 //verify response
+//   var showNote=document.querySelector(".correctNote");
+var correctNotes="Correct!";
+  document.getElementsByClassName("correctNote")[0].appendChild(correctNotes);
+
 // increase indexQuestion
-// showQuestion()
 
-// var choicesTags= document.querySelectorAll(".choices");
-// var questionsTags=document.querySelector(".questions > p");
-
-// function runQuiz(event){
-//     event.preventDefault();
-//  for(i=0;i<questions.length;i++){
-    
-//     questionsTags.textContent=questions[i].question;
-//     choicesTags[0]=document.createElement(questions[i].choice[0]);
-
-   
-// }
-// }
-// startButton.addEventListener("click",runQuiz);
-
- // choicesTags[0].setAttribute("button", questions[i].choice[0]);
-    // choicesTags[1].setAttribute("button", questions[i].choice[1]);
-    // choicesTags[2].setAttribute("button", questions[i].choice[2]);
 
 // setAttribute to h1 with questions
 // setAttibute to four button with choices
