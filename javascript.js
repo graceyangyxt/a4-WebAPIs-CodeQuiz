@@ -1,5 +1,6 @@
 var timerEl = document.querySelector(".timer-count");
-var startButton= document.querySelector(".start-button")
+var startButton= document.querySelector(".start-button");
+
 var current
 
 var timer;
@@ -19,32 +20,60 @@ var questions= [
 },
 {
     question:"Which operator is used to assign a value to a variable?",
-    choice:["A. = ","B. x ","C. * ","D. - "],
+    choice:["A = ","B x ","C * ","D - "],
     rightChoice:"A. = "
 },
 ];
 
-var choicesTags= document.querySelectorAll(".choices");
-var questionsTags=document.querySelector(".questions.p");
+var indexQuestion = 0;
 
-function runQuiz(event){
+function showQuestion(event){
+    // show the question
     event.preventDefault();
- for(i=0;i<questions.length;i++){
-    // questionsTags.textContent= questions[i].question;
-    questionsTags.textContent=questions[i].question;
-    choicesTags[0]=document.createElement(questions[i].choice[0]);
+var questionsTags=document.querySelector(".questions > p");
+questionsTags.textContent= questions[0].question;
 
-    // choicesTags[0].setAttribute("button", questions[i].choice[0]);
+//show the buttons
+var choicesTags= document.querySelector(".choices");
+var choiceAButton=choicesTags.setAttribute("class","choiceA");
+var choiceBButton=choicesTags.setAttribute("class","choiceB");
+var choiceCButton=choicesTags.setAttribute("class","choiceC");
+var choiceDButton=choicesTags.setAttribute("class","choiceD");
+choiceAButton.textContent = questions[0].choice[0]; 
+choiceBButton.textContent = questions[0].choice[1];
+choiceCButton.textContent = questions[0].choice[2];
+choiceDButton.textContent = questions[0].choice[3];
+
+}
+// add event listener
+startButton.addEventListener("click",showQuestion);
+//verify response
+// increase indexQuestion
+// showQuestion()
+
+// var choicesTags= document.querySelectorAll(".choices");
+// var questionsTags=document.querySelector(".questions > p");
+
+// function runQuiz(event){
+//     event.preventDefault();
+//  for(i=0;i<questions.length;i++){
+    
+//     questionsTags.textContent=questions[i].question;
+//     choicesTags[0]=document.createElement(questions[i].choice[0]);
+
+   
+// }
+// }
+// startButton.addEventListener("click",runQuiz);
+
+ // choicesTags[0].setAttribute("button", questions[i].choice[0]);
     // choicesTags[1].setAttribute("button", questions[i].choice[1]);
     // choicesTags[2].setAttribute("button", questions[i].choice[2]);
-}
-}
-
 
 // setAttribute to h1 with questions
 // setAttibute to four button with choices
 
-startButton.addEventListener("click",runQuiz);
+
 
 // loop in qustion array[]
 
