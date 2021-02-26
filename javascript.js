@@ -47,6 +47,8 @@ startButton.style.visibility="hidden";
     buttonA.setAttribute("class","buttonA");
     var buttonAtext = document.createTextNode(questions[i].choice[0]); 
     buttonA.appendChild(buttonAtext);
+    console.log(buttonA);
+    // buttonA.value = buttonAtext;
     document.getElementsByClassName("choices")[0].appendChild(buttonA);
 
   
@@ -54,21 +56,28 @@ startButton.style.visibility="hidden";
     buttonB.setAttribute("class","buttonB");
     var buttonBtext = document.createTextNode(questions[i].choice[1]); 
     buttonB.appendChild(buttonBtext);
+    // buttonB.value = buttonBtext;
     document.getElementsByClassName("choices")[0].appendChild(buttonB);
 
    
     buttonC.setAttribute("class","buttonC");
     var buttonCtext = document.createTextNode(questions[i].choice[2]); 
     buttonC.appendChild(buttonCtext);
+    // buttonC.value = buttonCtext;
     document.getElementsByClassName("choices")[0].appendChild(buttonC);
     
     
     buttonD.setAttribute("class","buttonD");
     var buttonDtext = document.createTextNode(questions[i].choice[3]); 
     buttonD.appendChild(buttonDtext);
+    // buttonD.value = buttonDtext;
     document.getElementsByClassName("choices")[0].appendChild(buttonD);
   }
 
+// function removeChoices(){
+//     document.getElementsByClassName("choices")[0].removeChild(buttonA[0]);
+    
+// }
 
 // add event listener
 startButton.addEventListener("click",showQuestion);
@@ -77,18 +86,24 @@ startButton.addEventListener("click",showQuestion);
 
 //else,responding the wrong one
 buttonC.addEventListener("click",function(){
+    // removeChoices();
+   
     i+=1;
     j+=1;
     // buttonAtext.style.visibility="hidden";
+    // removeChoices();
+    var passChoices= document.getElementsByClassName("choices")[0];
+    passChoices.remove();
     showQuestion();
+   
 
 })
 
 
 //verify response
 //   var showNote=document.querySelector(".correctNote");
-var correctNotes="Correct!";
-  document.getElementsByClassName("correctNote")[0].appendChild(correctNotes);
+// var correctNotes="Correct!";
+//   document.getElementsByClassName("correctNote")[0].appendChild(correctNotes);
 
 // increase indexQuestion
 
