@@ -13,6 +13,7 @@
 
 }
 
+
 h1{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 40px;
@@ -25,6 +26,7 @@ p{
 
 
 }
+
 button{
     background-color: purple;
     border-radius: 8px;
@@ -35,4 +37,13 @@ button{
 
  
 
+}
+.choices{
+    
+    background-color: purple;
+    border-radius: 8px;
+    border-color:whitesmoke;
+    padding: 5px 10px;
+    font-size: 20px;
+    color: whitesmoke;
 }

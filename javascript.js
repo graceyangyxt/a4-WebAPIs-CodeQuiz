@@ -1,5 +1,5 @@
 var timerEl = document.querySelector(".timer-count");
-var startButton= document.querySelector(".start-button");
+var startButton= document.querySelector("#start-button");
 
 var current
 
@@ -35,11 +35,27 @@ function showQuestion(event){
 
 //show the buttons
 //   var choicesTags= document.querySelector(".choices"); 
+startButton.style.visibility="hidden";
+
     var buttonA = document.createElement("buttonA");
     buttonA.setAttribute("class","buttonA");
-    var buttonAtext =document.createTextNode(questions[0].choice[0]); 
+    var buttonAtext = document.createTextNode(questions[0].choice[0]); 
     buttonA.appendChild(buttonAtext);
-    document.getElementsByClassName("choices").appendChild(buttonA);
+    document.getElementsByClassName("choices")[0].appendChild(buttonA);
+
+  
+    var buttonB = document.createElement("buttonB");
+    buttonB.setAttribute("class","buttonB");
+    var buttonBtext = document.createTextNode(questions[0].choice[1]); 
+    buttonB.appendChild(buttonBtext);
+    document.getElementsByClassName("choices")[0].appendChild(buttonB);
+
+    var buttonC = document.createElement("buttonC");
+    buttonC.setAttribute("class","buttonC");
+    var buttonCtext = document.createTextNode(questions[0].choice[2]); 
+    buttonC.appendChild(buttonCtext);
+    document.getElementsByClassName("choices")[0].appendChild(buttonC);
+    
   }
 
 
