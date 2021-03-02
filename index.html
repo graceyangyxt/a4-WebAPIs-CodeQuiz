@@ -21,22 +21,46 @@
         <div class="quiz-container">
           <div class="title-questions">
              <h1>Coding Quiz Challenge</h1>
-             <p class="questions">Welcome to join us with the coding quiz challenge! <br>
+             <p id="questions">Welcome to join us with the coding quiz challenge! <br>
                 You have 30 seconds for each of the five questions!</p>
           </div>
           <div>
              <button id="start-button">start</button>
           </div>
 
-
-          <div class="choices">
-             
+        <!-- wrap -->-->
+          <div id="choices" style="display: none;">
+             <button class="answer-btn"></button>
+             <button class="answer-btn"></button>
+             <button class="answer-btn"></button>
+             <button class="answer-btn"></button>
           </div>
 
-          <div class="correctNote">
+          <p class="correctNote" style="display:none">Correct!</p>
+          <p class="incorrectNote" style="display:none">Incorrect!</p>
+        </div>
+      </section>
+
+      <section>
+        <div class="game results">
+          <div class="results container">
+            <div>
+              <div class="inputName">
+                <label for="Player name">Player</label>
+              <input type="text" name="player-name" id="player-name" placeholder="Grace" />
+              </div>
+              
+              <h2>Right:<span class="right">0</span></h2>
+              <h2>Wrong:<span class="wrong">0</span></h2>
+              <h2 class="message"></h2>  
+              <button class="reset-button" style="visibility: hidden;">Play Again</button>
+            </div>
+           
           
           </div>
+          
         </div>
+      
       </section>
 
     </main>

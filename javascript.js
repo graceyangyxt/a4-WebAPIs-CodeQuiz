@@ -1,17 +1,26 @@
 var timerEl = document.querySelector(".timer-count");
 var startButton= document.querySelector("#start-button");
-var buttonA = document.createElement("buttonA");
-var buttonB = document.createElement("buttonB");
-var buttonC = document.createElement("buttonC");
-var buttonD = document.createElement("buttonD");
-var i=0;
-var j=0;
+var resetButton= document.querySelector(".reset-button");
+var questionP = document.querySelector("#questions");
+var choicesContainer = document.querySelector('#choices');
+var answerButtons = document.querySelectorAll('.answer-btn');
+var playerNameInput = document.querySelector("#player-name");
+var player= playerNameInput.value.trim();
+var finalmessage=  document.querySelector(".message");
 
-var current
+var correctNote = document.querySelector(".correctNote");
+var incorrectNote = document.querySelector(".incorrectNote");
+
+var right= document.querySelector(".right");
+var wrong= document.querySelector(".wrong");
+var rightCounter=0;
+var wrongCounter=0;
+
+
+var current;
 
 var timer;
-var timerCount;
-
+var timeLeft;
 
 var questions= [
 {
@@ -28,101 +37,141 @@ var questions= [
     question:"Which operator is used to assign a value to a variable?",
     choice:["A = ","B x ","C * ","D - "],
     rightChoice:"A. = "
-},
+}
 ];
 
 var indexQuestion = 0;
 
+
+
 function showQuestion(event){
+    var currentQuestion = questions[indexQuestion];
     // show the question
     // event.preventDefault();
-   var questionsTags=document.querySelector(".questions");
-   questionsTags.textContent= questions[j].question;
+    questionP.textContent = currentQuestion.question;
 
-//show the buttons
-//   var choicesTags= document.querySelector(".choices"); 
-startButton.style.visibility="hidden";
+    //show the buttons
+    //   var choicesTags= document.querySelector(".choices"); 
+    startButton.style.display = "none";
     
+    choicesContainer.style = "";
     
-    buttonA.setAttribute("class","buttonA");
-    var buttonAtext = document.createTextNode(questions[i].choice[0]); 
-    buttonA.appendChild(buttonAtext);
-    console.log(buttonA);
-    // buttonA.value = buttonAtext;
-    document.getElementsByClassName("choices")[0].appendChild(buttonA);
+    for (var i =0; i < answerButtons.length; i++) {
+        var button = answerButtons[i];
+        button.textContent = currentQuestion.choice[i];
+    }
+}
 
-  
- 
-    buttonB.setAttribute("class","buttonB");
-    var buttonBtext = document.createTextNode(questions[i].choice[1]); 
-    buttonB.appendChild(buttonBtext);
-    // buttonB.value = buttonBtext;
-    document.getElementsByClassName("choices")[0].appendChild(buttonB);
+function setRight(){
+    right.textContent=rightCounter;
+    localStorage.setItem("rightCount",rightCounter);
+}
+function setWrong(){
+    wrong.textContent=wrongCounter;
+    localStorage.setItem("wrongCount",wrongCounter);
+}
 
+function setTimer() {
+    timeLeft = 30;
+    timerEl.textContent = timeLeft;
+    timer = setInterval(function() {
+        if (timeLeft <= 0) {
+            endGame();
+            return;
+        }
+        timeLeft--;
+        timerEl.textContent = timeLeft;
+    }, 1000);
+}
+
+function startGame() {
+    indexQuestion = 0;
    
-    buttonC.setAttribute("class","buttonC");
-    var buttonCtext = document.createTextNode(questions[i].choice[2]); 
-    buttonC.appendChild(buttonCtext);
-    // buttonC.value = buttonCtext;
-    document.getElementsByClassName("choices")[0].appendChild(buttonC);
-    
-    
-    buttonD.setAttribute("class","buttonD");
-    var buttonDtext = document.createTextNode(questions[i].choice[3]); 
-    buttonD.appendChild(buttonDtext);
-    // buttonD.value = buttonDtext;
-    document.getElementsByClassName("choices")[0].appendChild(buttonD);
-  }
 
-// function removeChoices(){
-//     document.getElementsByClassName("choices")[0].removeChild(buttonA[0]);
     
-// }
+    setTimer();
+    showQuestion();
+    resetButton.style.visibility= "hidden";
+    // setRight();
+    // setWrong();
+}
+
+function endGame() {
+    
+    localStorage.setItem("player",JSON.stringify(player));
+    showScore();
+    resetButton.style.visibility= "visible";
+    console.log('ended');
+    answerButtons.disabled=true;
+    clearInterval(timer);
+}
+
+function showScore(){
+    var score=JSON.parse(localStorage.getItem("rightCount"));
+    if(score ===3 ){
+        finalmessage.textContent= "Congratulations"+ player +"! You Pass!"}
+    
+    else {
+        finalmessage.textContent= "Sorry"+ player + "! You Didn't Pass!"
+    }
+}
+
 
 // add event listener
-startButton.addEventListener("click",showQuestion);
+startButton.addEventListener("click", startGame);
 //if choose the right answer: function;
 
-
+var rightButtons=[questions[0].rightChoice,questions[1].rightChoice,questions[2].rightChoice];
 //else,responding the wrong one
-buttonC.addEventListener("click",function(){
-    // removeChoices();
+
+
+choicesContainer.addEventListener("click",function(event){
+    var userChoice = event.target.textContent;
    
-    i+=1;
-    j+=1;
-    // buttonAtext.style.visibility="hidden";
-    // removeChoices();
-    var passChoices= document.getElementsByClassName("choices")[0];
-    passChoices.remove();
-    showQuestion();
-   
+    if(userChoice === questions[indexQuestion].rightChoice){
+        // handle correct answer
+        correctNote.style="color: green";
+        rightCounter++;
+        setRight();
+        setTimeout(function() {correctNote.style.display = "none"}, 1500);
+   } else {
+        // handle incorrect answer
+        timeLeft - 5;
+        incorrectNote.style="color: red";
+        wrongCounter++;
+        setWrong();
+        setTimeout(function() {incorrectNote.style.display = "none"}, 1500);
+   }
+
+    if (indexQuestion < questions.length - 1){
+        indexQuestion++;
+        showQuestion();
+    } else {
+        endGame();
+    }
+
+
+    
+
 
 })
 
 
-//verify response
-//   var showNote=document.querySelector(".correctNote");
-// var correctNotes="Correct!";
-//   document.getElementsByClassName("correctNote")[0].appendChild(correctNotes);
-
-// increase indexQuestion
-
-
-// setAttribute to h1 with questions
-// setAttibute to four button with choices
-
-
-
-// loop in qustion array[]
+function resetGame(){
+    rightCounter=0;
+    wrongCounter=0;
+    finalmessage.style.display = "none";
+    setRight();
+    setWrong();
+    startGame();
+    
+}
+resetButton.addEventListener("click", resetGame);
 
 
-// when interact with the right button, 
-//change to next question, refresh the timer,show correct note
 
 
-//when interact with the wrong button,
-//no respond
 
 
-//
+
 
